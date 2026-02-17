@@ -1,48 +1,73 @@
-# JagUnify – Product Requirements Document (PRD)
+# Product Requirements Document (PRD)
+## Project: JagUnify – TAMUSA Student Support Chatbot
 
-## 1. Overview
-JagUnify is an AI-powered chatbot that helps students at Texas A&M University–San Antonio access campus information quickly and accurately.
+---
 
-## 2. Problem Statement
-Campus information is scattered across many webpages, making it difficult for students to find correct answers efficiently.
+## 1. Problem + Target Users
 
-## 3. Target Users
-- First-year students
-- Transfer students
-- International students
-- Current TAMUSA students
+TAMUSA students often struggle to find accurate information about advising, financial aid, tutoring, IT support, and campus services because information is scattered across multiple websites. This leads to wasted time, confusion, and frustration, especially for new and first-generation students. JagUnify targets TAMUSA students who need quick, reliable answers to common university-related questions in one centralized place. This problem matters because access to clear information directly affects student success and retention.
 
-## 4. Product Goals
-- Centralize campus information
-- Reduce student confusion
-- Provide instant, accurate responses
-- Improve student experience
+---
 
-## 5. Core Features
-- Web-based chatbot interface
-- Natural language question answering
-- Categories: Advising, Financial Aid, Tutoring, IT, Events
-- Responses include official university links
+## 2. Goal / Success Metrics
 
-## 6. MVP Scope
-The MVP will be a working chatbot website that answers common student questions using official TAMUSA sources. It will prioritize accuracy, simplicity, and fast responses without personalization.
+- The chatbot answers at least **80% of common student questions correctly** during testing.
+- Students can retrieve needed information in **under 30 seconds** per question.
+- Reduce repeated or misdirected student inquiries by providing clear responses.
+- Positive user feedback from a small pilot group (average rating of 4/5 or higher).
 
-## 7. Out of Scope
-- User accounts or authentication
-- Access to student records
-- Personalized recommendations
-- Mobile application
+---
 
-## 8. Data & Privacy
-- Uses only public TAMUSA information
-- No personal data collected
-- No storage of user chat history
+## 3. MVP User Stories
 
-## 9. Risks & Mitigation
-Risk: Incorrect or outdated information  
-Mitigation: Use official sources and provide verification links
+- As a TAMUSA student, I want to ask questions about advising so that I know who to contact.
+- As a student, I want to ask about financial aid deadlines so that I don’t miss important dates.
+- As a student, I want to find tutoring resources so that I can improve my academic performance.
+- As a student, I want to ask IT-related questions so that I can resolve technical issues quickly.
+- As a student, I want clear answers written in simple language so that information is easy to understand.
+- As a user, I want the chatbot to tell me when it doesn’t know an answer so that I am not misled.
 
-## 10. Success Metrics
-- Accuracy of chatbot responses
-- User satisfaction
-- Reduced time to find information
+---
+
+## 4. MVP Scope vs. Non-Goals
+
+### Must-Have Features
+- Text-based chatbot interface
+- Answers based on official TAMUSA information
+- Coverage of advising, financial aid, tutoring, and IT support
+- Basic error handling for unknown questions
+
+### Nice-to-Have Features (Optional)
+- Links to official TAMUSA web pages
+- Improved response phrasing
+- Expanded campus service coverage
+
+### Explicit Non-Goals
+- No user accounts or authentication
+- No personalized recommendations
+- No advanced AI training or fine-tuning
+- No production deployment
+
+---
+
+## 5. Acceptance Criteria
+
+- Users can submit a question and receive a relevant response end-to-end.
+- The chatbot produces an answer within **3 seconds**.
+- The system correctly handles unknown or unclear questions.
+- The chatbot fails safely by informing the user when information is unavailable.
+- All responses are readable and concise.
+
+---
+
+## 6. Assumptions + Constraints
+
+### Assumptions
+- Official TAMUSA information is publicly available.
+- Users will ask common, repetitive questions.
+
+### Constraints
+- Limited development time before Milestone 2.
+- No access to private university databases.
+- Must use low-cost or free technologies.
+- Must respect privacy and avoid collecting personal data.
