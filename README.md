@@ -22,7 +22,7 @@ This project is currently in the MVP development phase for an academic course.
 
 ## Team
 - Oscar Hernandez (Team Lead)
-- Ian Redondo
+- Ian Arredondo
 - Christian Hernandez
 - Dustin Heagerty
 
