@@ -1,0 +1,187 @@
+a {
+    color: #ffc4c4;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url("./img/campus.jpg");
+    background-size: cover;
+    background-position: center 10vvh;
+    background-repeat: no-repeat;
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+.log {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 70vw;
+    height: 80vh;
+    overflow-y: auto;
+    /* Make the chat scrollable */
+    padding-bottom: 3rem;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+textarea:disabled {
+    background-color: #999595;
+    color: black;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.human {
+    background-color: #6b2f3cab;
+    color: white;
+    align-self: flex-end;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 1rem;
+    max-width: 45%;
+    width: fit-content;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.timestamp {
+    align-self: flex-end;
+    margin-right: 1.5rem;
+    font-size: 0.75rem;
+}
+
+.timerep {
+    align-self: flex-start;
+    margin-left: 1.5rem;
+    font-size: 0.75rem;
+}
+
+.bot {
+    background-color: #6b2f3cab;
+    color: white;
+    align-self: flex-start;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-left: 1rem;
+    max-width: 45%;
+    width: fit-content;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 10vh;
+    margin-top: 1rem;
+}
+
+.img-but {
+    background: url('./img/jag-send.png') no-repeat;
+    background-size: contain;
+    background-color: #6b2f3c;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+textarea {
+    display: flex;
+    align-items: flex-end;
+    width: 65vw;
+    padding: 10px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    resize: none;
+}
+
+.botTyping {
+    background-color: #e0e0e0;
+    color: transparent;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 12px;
+    max-width: 75%;
+    align-self: flex-start;
+    display: inline-block;
+}
+
+.botTyping .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+    background-color: #555;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+}
+
+.botTyping .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.botTyping .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+}
+
+.typing-bubble {
+    background-color: #e0e0e0;
+    color: transparent;
+    position: relative;
+}
+
+.typing-bubble .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+    background-color: #555;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+}
+
+.typing-bubble .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-bubble .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+}
