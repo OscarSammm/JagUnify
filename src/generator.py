@@ -33,7 +33,7 @@ def jag_query_engine(index):
     # Initialize the Citation engine
     query_engine = CitationQueryEngine.from_args(
         index=index,
-        similarity_top_k=3,
+        similarity_top_k=7, #We can increase this to give the LLM more context to work with which can help with recall at the cost of more tokens and potentially more noise, but since we have a strict prompt it should be able to handle it
         citation_chunk_size=512,
     )
 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     # --- TEST 1: Grounded Policy Question ---
     print("TEST 1: GROUNDED TAMUSA INQUIRY")
     
-    query_1 = "Can you give me the degree plan of study for the Computer Science major at TAMUSA?"
+    query_1 = "Where can I access the student portal?"
     response_1 = engine.query(query_1)
     
     # Pass raw response through the Citation Layer

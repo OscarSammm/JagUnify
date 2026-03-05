@@ -1,3 +1,4 @@
+from operator import index
 import re
 #Validates and formats the response for the UI and ensures inline citations match the source list and handles refusals.
 def format_citations(response):
@@ -15,25 +16,29 @@ def format_citations(response):
     answer_text = response.response
     source_nodes = response.source_nodes
     formatted_sources = []
+    seen_urls = set()  # To track unique sources
+    current_id = 1
 
     #Extract and Format Sources
-    for i, node in enumerate(source_nodes):
-        index = i + 1
+    for node in source_nodes:
         url = node.metadata.get('source_url', 'https://www.tamusa.edu')
         
         #Grab a small snippet of the text used (first 150 chars)
-        snippet = node.get_content()[:150].strip().replace("\n", " ") + "..."
+        if url not in seen_urls:
+            snippet = node.get_content()[:150].strip().replace("\n", " ") + "..."
         
-        formatted_sources.append({
-            "id": index,
-            "url": url,
-            "snippet": snippet
-        })
+            formatted_sources.append({
+                "id": current_id,
+                "url": url,
+                "snippet": snippet
+            })
+            seen_urls.add(url)
+            current_id += 1
 
     #Final Verification
     # Ensure the answer actually contains citation brackets [1]
     # If the LLM forgot them, we return the refusal to stay grounded
-    if "[" not in answer_text and "]" not in answer_text:
+    if "[" not in answer_text:
         # Check if the text itself says it doesn't know
         if "sorry" in answer_text.lower() or "cannot find" in answer_text.lower():
             return {"answer": refusal_msg, "sources": []}
@@ -47,9 +52,8 @@ def print_display(formatted_output):
     print(f"\nResponse: {formatted_output['answer']}")
     
     if formatted_output['sources']:
-        print("\n--- SOURCES USED ---")
+        print("\nSources:")
         for src in formatted_output['sources']:
             print(f"[{src['id']}] {src['url']}")
-            print(f"    Preview: {src['snippet']}\n")
     else:
         print("\n(No sources verified for this response)")
