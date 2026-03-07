@@ -41,5 +41,5 @@ def load_tamusa_data(directory_path):
 
 if __name__ == "__main__":
     #We test the ingestion from our local folder
-    directory_path = './docs'
+    directory_path = '../docs/tamusa_data'
     # documents = load_tamusa_data(directory_path)

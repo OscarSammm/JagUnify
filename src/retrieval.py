@@ -9,7 +9,7 @@ import chromadb
 from ingestion import load_tamusa_data
 
 #Chunks documents, creates embeddings, and saves them to a local ChromaDB vector store
-def build_vector_store_index(data_directory='./docs', persist_directory='./storage'):
+def build_vector_store_index(data_directory='../docs/tamusa_data', persist_directory='./storage'):
     documents = load_tamusa_data(data_directory)
 
     #We use 1024 token chunks with a 50 token overlap to ensure context flows
@@ -38,7 +38,6 @@ def get_retriever(index=None, persist_directory='./storage'):
     return index.as_retriever(similarity_top_k=3)
 
 if __name__ == "__main__":
-
-    #We build the index from our local data and then test the retriever
-    # my_index = build_vector_store_index() #Comment this out after the first run to save credits and time since the index is persisted to disk
-    retriever = get_retriever(index=None) #Its set to none so that it loads the existing index from disk instead of rebuilding it
+    my_index = build_vector_store_index()
+    retriever = get_retriever(index=my_index)
+    print("Index built successfully.")
