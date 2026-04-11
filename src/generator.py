@@ -4,17 +4,31 @@ warnings.filterwarnings("ignore", message=".*urllib3.*")
 from llama_index.core import PromptTemplate, Settings
 from llama_index.core.query_engine import CitationQueryEngine
 from llama_index.core.postprocessor import SentenceTransformerRerank
-from llama_index.llms.openai import OpenAI
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+from llama_index.llms.azure_openai import AzureOpenAI
 from llama_index.core.llms import ChatMessage, MessageRole
 from retrieval import load_index
 
 CANDIDATE_K = 20  # Initial retrieval pool for the re-ranker to select from
 TOP_K = 7         # Final chunks passed to the LLM after re-ranking
 
+def _get_llm():
+    return AzureOpenAI(
+        model=os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1-mini"),
+        deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1-mini"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        api_version="2024-08-01-preview",
+        temperature=0,
+    )
+
 # Sets up the engine that turns retrieved chunks into a final answer with citations
 def jag_query_engine(index):
 
-    Settings.llm = OpenAI(model="gpt-4o-mini", temperature=0)
+    Settings.llm = _get_llm()
 
     # Custom prompt template for strict grounding
     qa_prompt_tmpl_str = (
@@ -61,7 +75,7 @@ def condense_question(history: list, question: str) -> str:
     if not history:
         return question
 
-    llm = OpenAI(model="gpt-4o-mini", temperature=0)
+    llm = _get_llm()
 
     convo_lines = []
     for turn in history:

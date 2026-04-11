@@ -78,4 +78,6 @@ async def ask(request: AskRequest):
         response = await loop.run_in_executor(None, engine.query, question)
         return format_citations(response)
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
