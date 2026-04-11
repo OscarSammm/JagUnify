@@ -6,17 +6,17 @@ load_dotenv()
 # Always resolve storage relative to this file so it works regardless of where you run from
 _SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_STORAGE = os.path.join(_SRC_DIR, 'storage')
-_DEFAULT_DATA = os.path.join(_SRC_DIR, '..', 'Data', 'tamusa_data')
+_DEFAULT_DATA = os.path.join(_SRC_DIR, '..', 'data', 'techdep_data', 'catalog.jsonl')
 from llama_index.core import VectorStoreIndex, StorageContext, Settings
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.vector_stores.chroma import ChromaVectorStore
 import chromadb
 
-from ingestion import load_tamusa_data
+from ingestion import load_jsonl_data
 
 #Chunks documents, creates embeddings, and saves them to a local ChromaDB vector store
-def build_vector_store_index(data_directory=_DEFAULT_DATA, persist_directory=_DEFAULT_STORAGE):
-    documents = load_tamusa_data(data_directory)
+def build_vector_store_index(data_path=_DEFAULT_DATA, persist_directory=_DEFAULT_STORAGE):
+    documents = load_jsonl_data(data_path)
 
     #We use 1024 token chunks with a 50 token overlap to ensure context flows
     Settings.node_parser = SentenceSplitter(chunk_size=1024, chunk_overlap=50)
@@ -51,5 +51,5 @@ if __name__ == "__main__":
         shutil.rmtree(_DEFAULT_STORAGE)
         print("Cleared existing storage.")
 
-    my_index = build_vector_store_index()
+    my_index = build_vector_store_index(_DEFAULT_DATA)
     print("Index built successfully.")

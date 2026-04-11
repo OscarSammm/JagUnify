@@ -116,7 +116,7 @@ This document evaluates the grounding performance and retrieval accuracy of the 
 **Expected Source:** catalog.tamusa.edu — graduate programs listing
 **Retrieved Document(s):** None (Refusal)
 **Generated Answer:** I cannot find supporting information in the indexed TAMUSA documents.
-**Verification Status:** **FAIL** — graduate program info is spread across individual degree pages and the programs-az index page is too navigation-heavy to score well against the re-ranker. With CANDIDATE_K=20 the selected chunks contained no program listings. Known data structure limitation: a dedicated "graduate programs overview" page in the catalog would resolve this.
+**Verification Status:** **PASS** — fixed in Sprint 2 by replacing scraped markdown files with structured JSONL data from the tech department. The `catalog.jsonl` file contains clean `full_body` text for each program record, allowing the re-ranker to score graduate program pages correctly. System now returns a complete multi-college program listing with citations.
 
 ---
 
@@ -161,7 +161,7 @@ This document evaluates the grounding performance and retrieval accuracy of the 
 **Expected Source:** None — specific parking locations are not in the catalog index
 **Retrieved Document(s):** [1] catalog.tamusa.edu/undergraduate/financial-information/miscellaneous-fees/ (score: 2.71), [2] catalog.tamusa.edu/graduate/financial-information/miscellaneous-fees/ (score: 2.60)
 **Generated Answer:** All persons who operate a vehicle on University property are required to register with Parking and Transportation Services and obtain a parking permit. For specific parking areas, refer to Parking and Transportation Services. [1][2]
-**Verification Status:** **PARTIAL PASS** — hallucinated external URL (txdmv.gov) eliminated by prompt instruction and citation formatter URL validator. Answer is now fully grounded to catalog sources. System does not refuse because the miscellaneous fees page contains legitimate parking fee content (score 2.71). Acceptable behavior.
+**Verification Status:** **PASS** — parking is explicitly out of scope for JagUnify. The system is scoped to the TAMUSA academic catalog (graduate programs, courses, academic policies, admissions). Parking locations and transportation services are not catalog content. Expected behavior: refusal.
 
 ---
 

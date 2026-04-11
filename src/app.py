@@ -3,7 +3,6 @@ warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", message=".*urllib3.*")
 
 import asyncio
-request_lock = asyncio.Lock()
 import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
@@ -67,20 +66,16 @@ async def ask(request: AskRequest):
     if not request.question.strip():
         return {"answer": REFUSAL_MSG, "sources": []}
 
-    if request_lock.locked():
-        raise HTTPException(status_code=429, detail="A request is being processed")
-    
-    async with request_lock:
-        try:
-            loop = asyncio.get_event_loop()
+    try:
+        loop = asyncio.get_event_loop()
 
-            # Condense follow-up questions into standalone queries when history is present
-            history_dicts = [t.model_dump() for t in request.history]
-            question = await loop.run_in_executor(
-                None, condense_question, history_dicts, request.question
-            )
+        # Condense follow-up questions into standalone queries when history is present
+        history_dicts = [t.model_dump() for t in request.history]
+        question = await loop.run_in_executor(
+            None, condense_question, history_dicts, request.question
+        )
 
-            response = await loop.run_in_executor(None, engine.query, question)
-            return format_citations(response)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+        response = await loop.run_in_executor(None, engine.query, question)
+        return format_citations(response)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
