@@ -249,3 +249,50 @@ This document evaluates the grounding performance and retrieval accuracy of the 
   - **Issue:** System does not refuse because a loosely relevant catalog page (miscellaneous fees) is retrieved.
   - **Cause:** Retrieval score exceeds refusal threshold due to indirect mention of parking fees.
   - **Result:** Acceptable grounded answer, but not a strict refusal.
+
+---
+
+## Additional Refusal Test Cases
+
+### Test Case 21 (Refusal)
+**Question:** What is the TAMUSA football team record this season?  
+**Expected Source:** None (sports not in catalog scope)  
+**Retrieved Document(s):**  
+**Generated Answer:**  
+**Verification Status:**  
+
+---
+
+### Test Case 22 (Refusal)
+**Question:** What dining options are available on campus?  
+**Expected Source:** None (out of scope)  
+**Retrieved Document(s):**  
+**Generated Answer:**  
+**Verification Status:**  
+
+---
+
+### Test Case 23 (Refusal)
+**Question:** What will the weather be like on campus tomorrow?  
+**Expected Source:** None (non-TAMUSA academic data)  
+**Retrieved Document(s):**  
+**Generated Answer:**  
+**Verification Status:**  
+
+---
+
+### Test Case 24 (Refusal)
+**Question:** What major should I choose if I like math?  
+**Expected Source:** None (personal advice)  
+**Retrieved Document(s):**  
+**Generated Answer:**  
+**Verification Status:**  
+
+---
+
+### Test Case 25 (Refusal)
+**Question:** What are the admission requirements for UT Austin?  
+**Expected Source:** None (non-TAMUSA query)  
+**Retrieved Document(s):**  
+**Generated Answer:**  
+**Verification Status:**  
