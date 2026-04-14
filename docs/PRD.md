@@ -42,3 +42,49 @@ The system will be deemed successful for Milestone 1 if it meets the following b
 * **Zero Out-of-Bounds Claims:** No claims are made that cannot be supported by the retrieved text snippets.
 * **Refusal Accuracy:** The system correctly refuses to answer 100% of "out-of-scope" questions (e.g., "Is there pizza available?").
 * **Performance Latency:** Retrieval and generation must complete within an acceptable limit (under 3 seconds) to ensure a positive user experience.
+
+## MVP Scope (Milestone 2 Update)
+
+### Scope Narrowing
+
+For Milestone 2, the system scope has been intentionally narrowed to focus on:
+
+> **TAMUSA Academic Catalog and Program Information Only**
+
+### Included in MVP
+- Undergraduate programs
+- Graduate programs
+- Degree requirements (if present in catalog)
+- Program descriptions
+
+### Excluded from MVP
+The following domains are explicitly **out of scope**:
+
+- Advising services  
+- Financial Aid  
+- Tutoring / Student Success services  
+- IT support  
+- Parking and transportation (unless later added explicitly)  
+- Dining, athletics, or general campus life  
+
+### Engineering Rationale
+
+This scope reduction was necessary to improve:
+
+1. **Retrieval Accuracy**
+   - Limiting to catalog documents reduces noise in vector search
+   - Improves top-k relevance for program-related queries
+
+2. **Grounding Reliability**
+   - Fewer domains → less ambiguity → stronger citation alignment
+   - Reduces risk of partial or incorrect matches
+
+3. **Evaluation Consistency**
+   - Test cases align with a single, well-defined corpus
+   - Easier to measure grounding and refusal accuracy
+
+4. **Development Focus**
+   - Enables deeper optimization of chunking, embeddings, and retrieval
+   - Avoids spreading effort across unrelated domains
+
+This aligns the system with a **high-confidence, verifiable RAG pipeline** rather than a broad but unreliable assistant.
