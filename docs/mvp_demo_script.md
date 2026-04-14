@@ -1,3 +1,5 @@
+## Demo Script
+
 Section 1 - RAG Backend
 Files: src/retrieval.py, src/generator.py
 The initial pipeline used basic top-k vector similarity retrieval. In Sprint 1 this was upgraded to a two-stage retrieval system: pull 20 candidates by vector similarity, then run a cross-encoder re-ranker (MS MARCO MiniLM) to score each chunk against the actual question and keep the top 7. This significantly improved answer relevance over keyword-overlap retrieval.
@@ -21,3 +23,27 @@ The data corpus was deliberately re-scoped from the entire TAMUSA web domain dow
 JagUnify Demo
 
 To start the demo, I navigated into the src/ directory and ran python -m uvicorn app:app --reload to launch the FastAPI backend, which loaded the ChromaDB vector index and the cross-encoder re-ranker on startup. In a separate terminal, I ran npm run dev from the frontend/ directory to bring up the React chat interface. From there, I walked through a series of grounded academic questions, each returning cited answers with source links mapped back to the official TAMUSA catalog, before finishing with a refusal case to demonstrate the system's out-of-scope behavior.
+
+---
+
+## Backup Questions:
+
+1. What are the hours of Student Business Services?
+
+category: Administrative
+
+2. How can I get access to my transcripts?
+
+category: Advising
+
+3. What courses can a Criminology major expect to take?
+
+category: Course information
+
+4. What is the Dean's preferred order from Whataburger?
+
+category: Refusal
+
+5. What plans does TAMUSA have for future construction on campus?
+
+category: Refusal
