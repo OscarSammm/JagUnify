@@ -26,18 +26,7 @@ def remove_control_chars(text: str) -> str:
     return re.sub(r"[\x00-\x1F\x7F]", "", text)
 
 def strip_html(text: str) -> str:
-    return re.sub(r"<.*?>", "", text)
-
-def remove_injection(text: str) -> str:
-    patterns = [
-        r"ignore previous instructions",
-        r"system prompt",
-        r"act as",
-        r"you are now",
-    ]
-    for p in patterns:
-        text = re.sub(p, "", text, flags=re.IGNORECASE)
-    return text
+    return re.sub(r"</?[a-zA-Z][^>]*>", "", text)
 
 def clean_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text)
@@ -46,7 +35,6 @@ def sanitize_input(text: str) -> str:
     text = normalize_text(text)
     text = remove_control_chars(text)
     text = strip_html(text)
-    text = remove_injection(text)
     text = clean_whitespace(text)
     return text
 
@@ -82,10 +70,16 @@ class HistoryTurn(BaseModel):
     role: str
     text: str = Field(max_length=MAX_TURN_TEXT_LEN)
 
+    @field_validator("role")
+    @classmethod
+    def validate_role(cls, v):
+        if v not in ("human", "bot"):
+            raise ValueError("Invalid role")
+        return v
 
 class AskRequest(BaseModel):
     question: str = Field(max_length=MAX_QUESTION_LEN)
-    history: list[HistoryTurn] = []
+    history: list[HistoryTurn] = Field(default_factory=list)
 
     @field_validator("history")
     @classmethod
