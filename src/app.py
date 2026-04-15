@@ -87,21 +87,20 @@ class AskRequest(BaseModel):
         # Keep only the most recent turns to limit prompt size
         return v[-MAX_HISTORY_TURNS:]
 
-
 @app.post("/ask")
 async def ask(request: AskRequest):
-    if not request.question.strip():
-        return {"answer": REFUSAL_MSG, "sources": []}
-
     try:
         loop = asyncio.get_event_loop()
 
-        # Condense follow-up questions into standalone queries when history is present
         question = sanitize_input(request.question)
+        if not question:
+            return {"answer": REFUSAL_MSG, "sources": []}
+
         history_dicts = [
             {"role": t.role, "text": sanitize_input(t.text)}
             for t in request.history
-            ]
+        ]
+
         question = await loop.run_in_executor(
             None, condense_question, history_dicts, question
         )
