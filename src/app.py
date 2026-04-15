@@ -16,6 +16,39 @@ from retrieval import load_index
 from generator import jag_query_engine, condense_question
 from citation_formatter import format_citations, REFUSAL_MSG
 
+import re
+import unicodedata
+
+def normalize_text(text: str) -> str:
+    return unicodedata.normalize("NFKC", text).strip()
+
+def remove_control_chars(text: str) -> str:
+    return re.sub(r"[\x00-\x1F\x7F]", "", text)
+
+def strip_html(text: str) -> str:
+    return re.sub(r"<.*?>", "", text)
+
+def remove_injection(text: str) -> str:
+    patterns = [
+        r"ignore previous instructions",
+        r"system prompt",
+        r"act as",
+        r"you are now",
+    ]
+    for p in patterns:
+        text = re.sub(p, "", text, flags=re.IGNORECASE)
+    return text
+
+def clean_whitespace(text: str) -> str:
+    return re.sub(r"\s+", " ", text)
+
+def sanitize_input(text: str) -> str:
+    text = normalize_text(text)
+    text = remove_control_chars(text)
+    text = strip_html(text)
+    text = remove_injection(text)
+    text = clean_whitespace(text)
+    return text
 
 # Load index and engine once at startup — not on every request
 @asynccontextmanager
@@ -70,9 +103,13 @@ async def ask(request: AskRequest):
         loop = asyncio.get_event_loop()
 
         # Condense follow-up questions into standalone queries when history is present
-        history_dicts = [t.model_dump() for t in request.history]
+        question = sanitize_input(request.question)
+        history_dicts = [
+            {"role": t.role, "text": sanitize_input(t.text)}
+            for t in request.history
+            ]
         question = await loop.run_in_executor(
-            None, condense_question, history_dicts, request.question
+            None, condense_question, history_dicts, question
         )
 
         response = await loop.run_in_executor(None, engine.query, question)
