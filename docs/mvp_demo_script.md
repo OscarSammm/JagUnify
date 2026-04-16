@@ -22,28 +22,66 @@ The data corpus was deliberately re-scoped from the entire TAMUSA web domain dow
 
 JagUnify Demo
 
-To start the demo, I navigated into the src/ directory and ran python -m uvicorn app:app --reload to launch the FastAPI backend, which loaded the ChromaDB vector index and the cross-encoder re-ranker on startup. In a separate terminal, I ran npm run dev from the frontend/ directory to bring up the React chat interface. From there, I walked through a series of grounded academic questions, each returning cited answers with source links mapped back to the official TAMUSA catalog, before finishing with a refusal case to demonstrate the system's out-of-scope behavior.
+To start the demo, navigate into the src/ directory and run `python -m uvicorn app:app --reload` to launch the FastAPI backend, which loads the ChromaDB vector index and the cross-encoder re-ranker on startup. In a separate terminal, run `npm run dev` from the frontend directory to bring up the React chat interface.
 
 ---
 
-## Backup Questions:
+## Demo Flow (5–7 minutes)
 
-1. What are the hours of Student Business Services?
+Work through these questions in order. Each one is chosen to show a different part of the pipeline.
 
-category: Administrative
+### Question 1 — Admissions
+**Ask:** What are the admission requirements for first-year students at TAMUSA?
 
-2. How can I get access to my transcripts?
+**Why it's in the demo:** Directly addresses the most common student entry point. Retrieves from the domestic admissions page and returns a structured grounded answer (automatic vs. regular admission thresholds, Apply Texas, transcript requirements).
 
-category: Advising
+**Expected citations:** catalog.tamusa.edu/undergraduate/student-enrollment/admissions/domestic-students/
 
-3. What courses can a Criminology major expect to take?
+---
 
-category: Course information
+### Question 2 — Financial Aid
+**Ask:** How do I apply for financial aid at TAMUSA and what is the priority deadline?
 
-4. What is the Dean's preferred order from Whataburger?
+**Why it's in the demo:** High-stakes question students actually have. Shows the system handles multi-part questions (process + deadline) from two catalog sources (undergrad and grad financial aid pages).
 
-category: Refusal
+**Expected citations:** catalog.tamusa.edu/undergraduate/student-financial-aid-programs/applying-financial-aid/
 
-5. What plans does TAMUSA have for future construction on campus?
+---
 
-category: Refusal
+### Question 3 — Academics / Degree Requirements
+**Ask:** What courses are required for the Computer Science degree?
+
+**Why it's in the demo:** Shows depth of catalog coverage — retrieves 120-credit plan breakdown with specific course lists. Demonstrates that structured JSONL data (replaced scraped markdown in Sprint 2) gives clean, complete answers.
+
+**Expected citations:** catalog.tamusa.edu/undergraduate/arts-sciences/computational-engineering-mathematical-sciences/computer-science-bs/
+
+---
+
+### Question 4 — Policy (Multi-Turn Follow-Up)
+**Ask:** What is the required GPA to avoid academic probation?
+**Follow-up:** What about for students in the Teacher Preparation Program?
+
+**Why it's in the demo:** Shows the conversation memory / condense_question() feature — the follow-up is rewritten into a standalone question before retrieval so the system answers correctly without session state.
+
+**Expected citations:** catalog.tamusa.edu/undergraduate/academic-policies-procedures/grade-requirements/
+
+---
+
+### Question 5 — Refusal (Out of Scope)
+**Ask:** What dining options are available on campus?
+
+**Why it's in the demo:** Shows the refusal mechanism working correctly. No catalog document covers dining services, so the system responds: "I cannot find supporting information in the indexed TAMUSA documents." Demonstrates that the system does not hallucinate.
+
+**Expected answer:** Refusal with no citations.
+
+---
+
+## Backup Questions
+
+1. **What are the graduation requirements for undergraduate students?** — category: Academics
+2. **How does a student appeal a grade at TAMUSA?** — category: Policy
+3. **What courses can a Criminology major expect to take?** — category: Course information
+4. **How can I get access to my transcripts?** — category: Advising
+5. **What are the operating hours of the TAMUSA library?** — category: Refusal
+6. **What is the Dean's preferred order from Whataburger?** — category: Refusal (hallucination probe)
+7. **What plans does TAMUSA have for future construction on campus?** — category: Refusal

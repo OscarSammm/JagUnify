@@ -39,7 +39,7 @@ Sprint 2 delivered strong engineering: the JSONL migration resolved TC12, fixed 
 |---|---|---|
 | Citation tooltip or clear deprioritization | Trieu | Either land the citation hover tooltip from Sprint 2 P2, or explicitly remove it from the scope with a one-line note in `mvp_demo_script.md` about why. No in-between. |
 | Error-state UX | Trieu | Add user-facing messages for backend-down and timeout cases. One commit, small scope. Matters for demo resilience if the backend stutters on stage. |
-| Decide on Azure vs OpenAI for demo | Ian | Choose which branch the final demo will run on. Document the decision and make sure the chosen branch is stable. Having two codepaths active going into demo week is a risk. |
+| ~~Decide on Azure vs OpenAI for demo~~ | Ian | **Decision made (April 15, 2026): Final demo will run on `main` branch (direct OpenAI, gpt-4o-mini).** The `feature/azure-ai` branch (gpt-4.1-mini) is preserved for enterprise use but will not be used on demo day. Rationale: `main` is fully tested, JSONL-backed, and has no Azure credential dependency risk on demo day. Azure branch is available as a future migration path if the tech department deploys an enterprise Azure environment. |
 
 ### P3 — Nice to Have (Days 5–7)
 
@@ -53,14 +53,14 @@ Sprint 2 delivered strong engineering: the JSONL migration resolved TC12, fixed 
 
 ## Definition of Done (Sprint 3)
 
-- [ ] Go/No-Go assessment filled in with real numbers and a final GO or NO-GO decision
-- [ ] Single consolidated data sources file reflecting the JSONL record structure
-- [ ] Chunk experiment has numeric results against the 20 test cases
-- [ ] Refusal test cases 21–25 executed and marked PASS or FAIL
-- [ ] Metrics section in evaluation doc refreshed with current numbers
-- [ ] Admissions question in main demo script
+- [ ] Go/No-Go assessment filled in with real numbers and a final GO or NO-GO decision — **Dustin**
+- [ ] Single consolidated data sources file reflecting the JSONL record structure — **Oscar**
+- [ ] Chunk experiment has numeric results against the 20 test cases — **Oscar**
+- [ ] Refusal test cases 21–25 executed and marked PASS or FAIL — **Dustin**
+- [x] Metrics section in evaluation doc refreshed with current numbers — April 16
+- [x] Admissions question in main demo script — April 16
 - [ ] Full team has done at least one end-to-end dry run
-- [ ] Branch decision made (Azure vs OpenAI) and documented
+- [x] Branch decision made (Azure vs OpenAI) and documented — main/OpenAI, April 16
 
 ---
 
