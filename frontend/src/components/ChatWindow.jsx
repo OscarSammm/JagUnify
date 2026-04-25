@@ -65,13 +65,30 @@ export default function ChatWindow() {
     setIsWaiting(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/ask`, {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
+      const res = await fetch("http://localhost:8000/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: content, history }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
+      // Backend returned error
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`SERVER_ERROR:${res.status}:${text}`);
+      }
+
       const data = await res.json();
+
+      // Empty or malformed response
+      if (!data || !data.answer) {
+        throw new Error("EMPTY_RESPONSE");
+      }
 
       setMessages((prev) => [
         ...prev,
@@ -83,17 +100,32 @@ export default function ChatWindow() {
           time: formatTime(new Date()),
         },
       ]);
-    } catch {
+    } catch (err) {
+      let message = "Unknown error.";
+
+      if (err.name === "AbortError") {
+        message = "Request timed out. The server took too long to respond.";
+      } else if (err.message.includes("Failed to fetch")) {
+        message =
+          "Cannot reach backend. Verify FastAPI is running on port 8000.";
+      } else if (err.message.startsWith("SERVER_ERROR")) {
+        message = "Backend error. Check server logs.";
+      } else if (err.message === "EMPTY_RESPONSE") {
+        message = "Received empty response from server.";
+      }
+
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now() + 1,
           role: "bot",
-          text: "Sorry, I'm having trouble connecting. Please try again.",
+          text: message,
           sources: [],
           time: formatTime(new Date()),
         },
       ]);
+
+      console.error("API error:", err);
     } finally {
       setIsWaiting(false);
       if (inputRef.current) inputRef.current.focus();

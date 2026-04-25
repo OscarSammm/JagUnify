@@ -61,7 +61,7 @@ export default function MessageBubble({ message }) {
             {message.sources && message.sources.length > 0 && (
               <div className="mt-3 border-t border-white/20 pt-2 text-xs text-blue-200">
                 {message.sources.map((src) => (
-                  <div key={src.id}>
+                  <div key={src.id} className="group relative">
                     [{src.id}]{" "}
                     <a
                       href={src.url}
@@ -71,6 +71,12 @@ export default function MessageBubble({ message }) {
                     >
                       {src.url}
                     </a>
+                    <div className="pointer-events-none absolute left-0 top-full z-50 mt-1 hidden w-80 rounded-lg border border-zinc-300 bg-white p-3 text-xs text-zinc-800 shadow-lg group-hover:block">
+                      <div className="mb-1 font-semibold text-zinc-900">
+                        Source preview
+                      </div>
+                      <div>{src.snippet || "No preview available."}</div>
+                    </div>
                   </div>
                 ))}
               </div>
