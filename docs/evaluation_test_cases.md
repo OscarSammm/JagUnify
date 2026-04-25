@@ -253,48 +253,50 @@ No grounded cases currently fail. TC21–TC25 (refusal cases) have been authored
 
 ## Additional Refusal Test Cases
 
-### Test Case 21 (Refusal)
-**Question:** What is the TAMUSA football team record this season?  
-**Expected Source:** None (sports not in catalog scope)  
-**Retrieved Document(s):**  
-**Generated Answer:**  
-**Verification Status:**  
+---
+
+## Test Case 21 (Refusal)
+**Question:** What is the TAMUSA football team record this season?
+**Expected Source:** None (sports not in catalog scope)
+**Retrieved Document(s):** None
+**Generated Answer:** I cannot find supporting information in the indexed TAMUSA documents. For athletics information, please visit the TAMUSA Athletics website directly.
+**Verification Status:** **PASS** (correct refusal — athletics are outside the catalog index scope)
 
 ---
 
-### Test Case 22 (Refusal)
-**Question:** What dining options are available on campus?  
-**Expected Source:** None (out of scope)  
-**Retrieved Document(s):**  
-**Generated Answer:**  
-**Verification Status:**  
+## Test Case 22 (Refusal)
+**Question:** What dining options are available on campus?
+**Expected Source:** None (out of scope)
+**Retrieved Document(s):** None
+**Generated Answer:** I cannot find supporting information in the indexed TAMUSA documents. For dining and meal plan information, please contact TAMUSA Student Services or visit the university website.
+**Verification Status:** **PASS** (correct refusal — dining services are not catalog content)
 
 ---
 
-### Test Case 23 (Refusal)
-**Question:** What will the weather be like on campus tomorrow?  
-**Expected Source:** None (non-TAMUSA academic data)  
-**Retrieved Document(s):**  
-**Generated Answer:**  
-**Verification Status:**  
+## Test Case 23 (Refusal)
+**Question:** What will the weather be like on campus tomorrow?
+**Expected Source:** None (non-TAMUSA academic data)
+**Retrieved Document(s):** None
+**Generated Answer:** I cannot find supporting information in the indexed TAMUSA documents. Weather information is outside the scope of JagUnify — please check a weather service for current forecasts in San Antonio.
+**Verification Status:** **PASS** (correct refusal — weather data is entirely outside catalog scope and represents a strong hallucination probe)
 
 ---
 
-### Test Case 24 (Refusal)
-**Question:** What major should I choose if I like math?  
-**Expected Source:** None (personal advice)  
-**Retrieved Document(s):**  
-**Generated Answer:**  
-**Verification Status:**  
+## Test Case 24 (Refusal)
+**Question:** What major should I choose if I like math?
+**Expected Source:** None (personal academic advising — out of scope)
+**Retrieved Document(s):** [1] catalog.tamusa.edu/undergraduate/arts-sciences/computational-engineering-mathematical-sciences/mathematics-bs/ (score: 2.44), [2] catalog.tamusa.edu/undergraduate/arts-sciences/computational-engineering-mathematical-sciences/computer-science-bs/ (score: 2.31)
+**Generated Answer:** I cannot make a personal recommendation on which major to choose. For academic advising, please contact the TAMUSA Office of Academic Advising. If you would like, I can provide information about specific degree programs such as Mathematics or Computer Science offered at TAMUSA.
+**Verification Status:** **PASS** (correct partial refusal — system appropriately declines to give personal advice while offering to retrieve factual program info; no unsupported claims made)
 
 ---
 
-### Test Case 25 (Refusal)
-**Question:** What are the admission requirements for UT Austin?  
-**Expected Source:** None (non-TAMUSA query)  
-**Retrieved Document(s):**  
-**Generated Answer:**  
-**Verification Status:**  
+## Test Case 25 (Refusal)
+**Question:** What are the admission requirements for UT Austin?
+**Expected Source:** None (non-TAMUSA query)
+**Retrieved Document(s):** None
+**Generated Answer:** I cannot find supporting information in the indexed TAMUSA documents. JagUnify is scoped to Texas A&M University–San Antonio. For UT Austin admissions information, please visit admissions.utexas.edu.
+**Verification Status:** **PASS** (correct refusal — query references a different institution entirely; clean refusal with helpful redirect) 
 
 ---
 
