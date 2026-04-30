@@ -1,387 +1,60 @@
-# Project Data Sources
-### Date: 4/4/2026
+# Data Sources — JagUnify
+**Last updated:** 2026-04-30
 
 ---
 
-## Full List of Data Sources
+## Primary Data Source
 
-The following documents are all within the scope of our MVP, though not all are explicity showcased during the live demo. These documents can also be found within the `Data/tamusa_data/catalog` folder, which is where the project pull the data from to conduct its queries.
+**Source:** Texas A&M University – San Antonio Academic Catalog  
+**URL:** `catalog.tamusa.edu`  
+**Format:** JSONL (`data/techdep_data/catalog.jsonl`)  
+**Records:** 2,028  
+**Provided by:** TAMUSA Technology Department  
+**Collection method:** Crawl of `catalog.tamusa.edu`; each page converted to a structured JSON record
 
-catalog.tamusa.edu.md
-catalog.tamusa.edu_azindex.md
-catalog.tamusa.edu_graduate.md
-catalog.tamusa.edu_graduate_academic-calendar.md
-catalog.tamusa.edu_graduate_academic-regulations.md
-catalog.tamusa.edu_graduate_academic-regulations_class-attendance.md
-catalog.tamusa.edu_graduate_academic-regulations_class-policies.md
-catalog.tamusa.edu_graduate_academic-regulations_general-requirements-graduation-masters-degree.md
-catalog.tamusa.edu_graduate_academic-regulations_grades.md
-catalog.tamusa.edu_graduate_academic-regulations_registration.md
-catalog.tamusa.edu_graduate_academic-regulations_registration_normal-course-load.md
-catalog.tamusa.edu_graduate_academic-regulations_schedule-changes.md
-catalog.tamusa.edu_graduate_academic-regulations_student-records.md
-catalog.tamusa.edu_graduate_arts-sciences.md
-catalog.tamusa.edu_graduate_arts-sciences_computational-engineering-mathematics.md
-catalog.tamusa.edu_graduate_arts-sciences_computational-engineering-mathematics_ai-certificate.md
-catalog.tamusa.edu_graduate_arts-sciences_computational-engineering-mathematics_cyber-security-ms.md
-catalog.tamusa.edu_graduate_arts-sciences_computational-engineering-mathematics_mscs.md
-catalog.tamusa.edu_graduate_arts-sciences_criminology-political-science.md
-catalog.tamusa.edu_graduate_arts-sciences_criminology-political-science_criminology-criminal-justice-ms.md
-catalog.tamusa.edu_graduate_arts-sciences_health-behavioral-sciences.md
-catalog.tamusa.edu_graduate_arts-sciences_health-behavioral-sciences_psychology-ms.md
-catalog.tamusa.edu_graduate_arts-sciences_language-literature-arts.md
-catalog.tamusa.edu_graduate_arts-sciences_language-literature-arts_english-ma.md
-catalog.tamusa.edu_graduate_arts-sciences_natural-sciences.md
-catalog.tamusa.edu_graduate_arts-sciences_natural-sciences_biology-ms.md
-catalog.tamusa.edu_graduate_arts-sciences_natural-sciences_water-resources-technology-ms.md
-catalog.tamusa.edu_graduate_board-regents-university-administration.md
-catalog.tamusa.edu_graduate_business.md
-catalog.tamusa.edu_graduate_business_accounting-finance.md
-catalog.tamusa.edu_graduate_business_accounting-finance_mpa.md
-catalog.tamusa.edu_graduate_business_management-marketing.md
-catalog.tamusa.edu_graduate_business_management-marketing_11-month-mba.md
-catalog.tamusa.edu_graduate_business_management-marketing_11-month-mba_calendar.md
-catalog.tamusa.edu_graduate_business_management-marketing_online-pathways-mba.md
-catalog.tamusa.edu_graduate_course-description-information.md
-catalog.tamusa.edu_graduate_courses-az.md
-catalog.tamusa.edu_graduate_courses-az_aba.md
-catalog.tamusa.edu_graduate_courses-az_acct.md
-catalog.tamusa.edu_graduate_courses-az_biol.md
-catalog.tamusa.edu_graduate_courses-az_buad.md
-catalog.tamusa.edu_graduate_courses-az_cisa.md
-catalog.tamusa.edu_graduate_courses-az_crim.md
-catalog.tamusa.edu_graduate_courses-az_csci.md
-catalog.tamusa.edu_graduate_courses-az_csec.md
-catalog.tamusa.edu_graduate_courses-az_econ.md
-catalog.tamusa.edu_graduate_courses-az_edad.md
-catalog.tamusa.edu_graduate_courses-az_edbl.md
-catalog.tamusa.edu_graduate_courses-az_edcg.md
-catalog.tamusa.edu_graduate_courses-az_edci.md
-catalog.tamusa.edu_graduate_courses-az_edec.md
-catalog.tamusa.edu_graduate_courses-az_eded.md
-catalog.tamusa.edu_graduate_courses-az_edfr.md
-catalog.tamusa.edu_graduate_courses-az_edhl.md
-catalog.tamusa.edu_graduate_courses-az_edkn.md
-catalog.tamusa.edu_graduate_courses-az_edrg.md
-catalog.tamusa.edu_graduate_courses-az_edse.md
-catalog.tamusa.edu_graduate_courses-az_engl.md
-catalog.tamusa.edu_graduate_courses-az_finc.md
-catalog.tamusa.edu_graduate_courses-az_mba.md
-catalog.tamusa.edu_graduate_courses-az_mgmt.md
-catalog.tamusa.edu_graduate_courses-az_mktg.md
-catalog.tamusa.edu_graduate_courses-az_psyc.md
-catalog.tamusa.edu_graduate_courses-az_qmbs.md
-catalog.tamusa.edu_graduate_courses-az_watr.md
-catalog.tamusa.edu_graduate_education-human-development.md
-catalog.tamusa.edu_graduate_education-human-development_counseling-health-kinesiology.md
-catalog.tamusa.edu_graduate_education-human-development_counseling-health-kinesiology_applied-behavior-analysis-ms.md
-catalog.tamusa.edu_graduate_education-human-development_counseling-health-kinesiology_clinical-mental-health-counseling-ma.md
-catalog.tamusa.edu_graduate_education-human-development_counseling-health-kinesiology_counseling-guidance-ma-school.md
-catalog.tamusa.edu_graduate_education-human-development_counseling-health-kinesiology_kinesiology-ms.md
-catalog.tamusa.edu_graduate_education-human-development_counseling-health-kinesiology_marriage-couple-family-counseling-ma.md
-catalog.tamusa.edu_graduate_education-human-development_curriculum-instruction.md
-catalog.tamusa.edu_graduate_education-human-development_curriculum-instruction_multicultural-education-ma.md
-catalog.tamusa.edu_graduate_education-human-development_curriculum-instruction_reading-ms.md
-catalog.tamusa.edu_graduate_education-human-development_curriculum-instruction_reading-specialist-certification.md
-catalog.tamusa.edu_graduate_education-human-development_educator-cafe.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_-educational-administration-superintendency-certification.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_bilingual-education-ms.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_early-childhood-med.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_educational-administration-certification.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_educational-administration-ma.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_educational-diagnostician-certificate.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_instructional-leadership-ma.md
-catalog.tamusa.edu_graduate_education-human-development_educator-leadership-preparation_special-education-med.md
-catalog.tamusa.edu_graduate_faculty-roster.md
-catalog.tamusa.edu_graduate_financial-information.md
-catalog.tamusa.edu_graduate_financial-information_educational-expenses.md
-catalog.tamusa.edu_graduate_financial-information_mandatory-tuition-fees.md
-catalog.tamusa.edu_graduate_financial-information_miscellaneous-fees.md
-catalog.tamusa.edu_graduate_financial-information_refund-fees.md
-catalog.tamusa.edu_graduate_financial-information_tuition-fees.md
-catalog.tamusa.edu_graduate_student-enrollment.md
-catalog.tamusa.edu_graduate_student-enrollment_admissions.md
-catalog.tamusa.edu_graduate_student-enrollment_admissions_domestic-students.md
-catalog.tamusa.edu_graduate_student-enrollment_admissions_international.md
-catalog.tamusa.edu_graduate_student-enrollment_admissions_program-specific-requirements.md
-catalog.tamusa.edu_graduate_student-enrollment_student-transitions.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_applying-financial-aid.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_disbursement-financial-aid.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_enrollment-multiple-institutions.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_federal-direct-loans.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_general-information.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_repayment-financial-aid-due-withdrawal.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_reviewing-financial-aid-status.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_reviewing-financial-aid-status_accepting-awards-online.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_sap-policy-financial-aid.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_scholarship-information.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_student-employment.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_students-rights-responsibilities.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_summer-financial-aid.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_terms-conditions-financial-aid.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_types-aid.md
-catalog.tamusa.edu_graduate_student-financial-aid-programs_work-study.md
-catalog.tamusa.edu_graduate_student-resources-services.md
-catalog.tamusa.edu_graduate_student-resources-services_academic-resources.md
-catalog.tamusa.edu_graduate_student-resources-services_military-affairs.md
-catalog.tamusa.edu_graduate_student-resources-services_other-services.md
-catalog.tamusa.edu_graduate_student-resources-services_student-life.md
-catalog.tamusa.edu_graduate_student-resources-services_student-services.md
-catalog.tamusa.edu_graduate_student-resources-services_title-ix.md
-catalog.tamusa.edu_programs-az.md
-catalog.tamusa.edu_undergraduate.md
-catalog.tamusa.edu_undergraduate_academic-calendar.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_advising.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_advising_plan.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_class-attendance.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_class.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_commencement-honors.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_commencement-honors_graduation.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_commencement-honors_semester-recognitions.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_concurrent-enrollment.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_core-curriculum.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_course-listings.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_dishonesty.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_enrollment-status-financial-assistance.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_grade-requirements.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_grades.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_honors-program.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_non-credit-admission.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_other-degree-requirement.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_reading-days.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_registration.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_registration_classification-degree-seeking-students.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_registration_definition-credit-hour.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_registration_normal-load.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_registration_prerequisites.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_repetition-course.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_restrictions.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_schedule-changes.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_standing.md
-catalog.tamusa.edu_undergraduate_academic-policies-procedures_student-records.md
-catalog.tamusa.edu_undergraduate_arts-sciences.md
-catalog.tamusa.edu_undergraduate_arts-sciences_baas.md
-catalog.tamusa.edu_undergraduate_arts-sciences_bgs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_ai-certificate.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_computer-information-systems-assurance-security-concent.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_computer-science-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_computer-science-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_cyber-engineering-technology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_cyber-security-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_electronic-systems-engineering-technology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_mathematical-biology-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_mathematics-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_mathematics-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_mathematics-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_computational-engineering-mathematical-sciences_mathematics-teacher-certification-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_criminology-criminal-justice-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_criminology-criminal-justice-concentration-baas.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_criminology-criminal-justice-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_legal-studies-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_mexican-american-latinx-borderlands-studies-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_military-science-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_peace-conflict-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_political-science-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_political-science-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_criminology-political-science_rotc.md
-catalog.tamusa.edu_undergraduate_arts-sciences_health-behavioral-sciences.md
-catalog.tamusa.edu_undergraduate_arts-sciences_health-behavioral-sciences_community-health-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_health-behavioral-sciences_health-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_health-behavioral-sciences_psychology-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_health-behavioral-sciences_psychology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_health-behavioral-sciences_psychology-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography_history-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography_history-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography_history-teacher-certification-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography_history-teacher-certification-social-studies-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography_philosophy-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_history-philosophy-geography_womens-gender-studies-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_creative-arts-and-performance-studies-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_english-ba-literature-emphasis.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_english-ba-rhetoric-writing-emphasis.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_english-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_english-teacher-certification-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_spanish-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_spanish-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_language-literature-arts_spanish-teacher-certification-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_bilingual-health-humanities-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biochemistry-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-concentration-cell-molecular-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-concentration-ecology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-concentration-pre-health-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-concentration-zoology-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_biology-teacher-certification-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_chemistry-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_chemistry-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_chemistry-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_chemistry-teacher-certification-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_water-resources-science-technology-baas.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_water-resources-science-technology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_natural-sciences_water-resources-science-technology-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_sociology-communication.md
-catalog.tamusa.edu_undergraduate_arts-sciences_sociology-communication_communication-minor.md
-catalog.tamusa.edu_undergraduate_arts-sciences_sociology-communication_communications-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_sociology-communication_sociology-ba.md
-catalog.tamusa.edu_undergraduate_arts-sciences_sociology-communication_sociology-bs.md
-catalog.tamusa.edu_undergraduate_arts-sciences_sociology-communication_sociology-minor.md
-catalog.tamusa.edu_undergraduate_board-regents-university-administration.md
-catalog.tamusa.edu_undergraduate_business.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance_accounting-bba.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance_computer-information-systems-bba.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance_computer-information-systems-ias-bba.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance_computer-information-systems-minor.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance_finance-bba.md
-catalog.tamusa.edu_undergraduate_business_accounting-finance_information-technology-concentration-baas.md
-catalog.tamusa.edu_undergraduate_business_baas.md
-catalog.tamusa.edu_undergraduate_business_management-marketing.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_ai-certificate.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_business-administration-minor.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_business-concentration-baas.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_digital-marketing-certificate.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_entrepreneurship-certificate.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_fire-emergency-services-administration-concentration-baas.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_fire-emergency-services-administration-emergency-medical-services-concentration-baas.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_fire-emergency-services-administration-homeland-security-concentration-baas.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_general-business-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_international-management-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_management-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_management-entrepreneurship-concentration-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_management-human-resources-concentration-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_management-supply-chain-concentration-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_marketing-bba.md
-catalog.tamusa.edu_undergraduate_business_management-marketing_marketing-minor.md
-catalog.tamusa.edu_undergraduate_course-description-information.md
-catalog.tamusa.edu_undergraduate_courses-az.md
-catalog.tamusa.edu_undergraduate_courses-az_aba.md
-catalog.tamusa.edu_undergraduate_courses-az_acct.md
-catalog.tamusa.edu_undergraduate_courses-az_arts.md
-catalog.tamusa.edu_undergraduate_courses-az_bcom.md
-catalog.tamusa.edu_undergraduate_courses-az_biol.md
-catalog.tamusa.edu_undergraduate_courses-az_blaw.md
-catalog.tamusa.edu_undergraduate_courses-az_buad.md
-catalog.tamusa.edu_undergraduate_courses-az_cete.md
-catalog.tamusa.edu_undergraduate_courses-az_chem.md
-catalog.tamusa.edu_undergraduate_courses-az_cisa.md
-catalog.tamusa.edu_undergraduate_courses-az_comm.md
-catalog.tamusa.edu_undergraduate_courses-az_crim.md
-catalog.tamusa.edu_undergraduate_courses-az_csci.md
-catalog.tamusa.edu_undergraduate_courses-az_csec.md
-catalog.tamusa.edu_undergraduate_courses-az_econ.md
-catalog.tamusa.edu_undergraduate_courses-az_edbl.md
-catalog.tamusa.edu_undergraduate_courses-az_edci.md
-catalog.tamusa.edu_undergraduate_courses-az_edec.md
-catalog.tamusa.edu_undergraduate_courses-az_eded.md
-catalog.tamusa.edu_undergraduate_courses-az_edfr.md
-catalog.tamusa.edu_undergraduate_courses-az_edhl.md
-catalog.tamusa.edu_undergraduate_courses-az_edhs.md
-catalog.tamusa.edu_undergraduate_courses-az_edkn.md
-catalog.tamusa.edu_undergraduate_courses-az_edrg.md
-catalog.tamusa.edu_undergraduate_courses-az_edse.md
-catalog.tamusa.edu_undergraduate_courses-az_engl.md
-catalog.tamusa.edu_undergraduate_courses-az_entc.md
-catalog.tamusa.edu_undergraduate_courses-az_eset.md
-catalog.tamusa.edu_undergraduate_courses-az_fesa.md
-catalog.tamusa.edu_undergraduate_courses-az_finc.md
-catalog.tamusa.edu_undergraduate_courses-az_geog.md
-catalog.tamusa.edu_undergraduate_courses-az_geol.md
-catalog.tamusa.edu_undergraduate_courses-az_govt.md
-catalog.tamusa.edu_undergraduate_courses-az_hcsa.md
-catalog.tamusa.edu_undergraduate_courses-az_hist.md
-catalog.tamusa.edu_undergraduate_courses-az_hlth.md
-catalog.tamusa.edu_undergraduate_courses-az_honr.md
-catalog.tamusa.edu_undergraduate_courses-az_math.md
-catalog.tamusa.edu_undergraduate_courses-az_mgmt.md
-catalog.tamusa.edu_undergraduate_courses-az_mktg.md
-catalog.tamusa.edu_undergraduate_courses-az_msci.md
-catalog.tamusa.edu_undergraduate_courses-az_mspf.md
-catalog.tamusa.edu_undergraduate_courses-az_musi.md
-catalog.tamusa.edu_undergraduate_courses-az_ncbo.md
-catalog.tamusa.edu_undergraduate_courses-az_phil.md
-catalog.tamusa.edu_undergraduate_courses-az_phys.md
-catalog.tamusa.edu_undergraduate_courses-az_pols.md
-catalog.tamusa.edu_undergraduate_courses-az_psyc.md
-catalog.tamusa.edu_undergraduate_courses-az_qmbs.md
-catalog.tamusa.edu_undergraduate_courses-az_soci.md
-catalog.tamusa.edu_undergraduate_courses-az_span.md
-catalog.tamusa.edu_undergraduate_courses-az_univ.md
-catalog.tamusa.edu_undergraduate_courses-az_watr.md
-catalog.tamusa.edu_undergraduate_courses-az_wgst.md
-catalog.tamusa.edu_undergraduate_education-human-development.md
-catalog.tamusa.edu_undergraduate_education-human-development_baas.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_applied-behavior-analysis-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_applied-behavior-analysis-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_exercise-science-pre-physical-therapy-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_health-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_human-services-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_kinesiology-coaching-concentration-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_kinesiology-ec-12-physical-education-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_kinesiology-exercise-science-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_kinesiology-exercise-science-pre-pt-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_counseling-health-kinesiology_kinesiology-physical-education-grades-ec-12-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_curriculum-instruction.md
-catalog.tamusa.edu_undergraduate_education-human-development_curriculum-instruction_education-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_curriculum-instruction_education-grades-ec-6-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_curriculum-instruction_interdisciplinary-studies-bilingual-generalist-grades-4-8-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_curriculum-instruction_interdisciplinary-studies-bilingual-generalist-grades-ec-6-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-cafe.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_child-development-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_child-development-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_early-childhood-education-concentration-non-certification.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_education-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_interdisciplinary-studies-concentration-non-certification.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_special-education-bs.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_special-education-minor.md
-catalog.tamusa.edu_undergraduate_education-human-development_educator-leadership-preparation_tu-casa.md
-catalog.tamusa.edu_undergraduate_faculty-roster.md
-catalog.tamusa.edu_undergraduate_financial-information.md
-catalog.tamusa.edu_undergraduate_financial-information_educational-expenses.md
-catalog.tamusa.edu_undergraduate_financial-information_mandatory-fees.md
-catalog.tamusa.edu_undergraduate_financial-information_miscellaneous-fees.md
-catalog.tamusa.edu_undergraduate_financial-information_refund-fees.md
-catalog.tamusa.edu_undergraduate_financial-information_tuition-fees.md
-catalog.tamusa.edu_undergraduate_student-enrollment.md
-catalog.tamusa.edu_undergraduate_student-enrollment_admissions.md
-catalog.tamusa.edu_undergraduate_student-enrollment_admissions_domestic-students.md
-catalog.tamusa.edu_undergraduate_student-enrollment_admissions_international.md
-catalog.tamusa.edu_undergraduate_student-enrollment_transfer-credit.md
-catalog.tamusa.edu_undergraduate_student-enrollment_transitions.md
-catalog.tamusa.edu_undergraduate_student-enrollment_tsi.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_applying-financial-aid.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_disbursement-financial-aid.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_enrollment-multiple-institutions.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_federal-direct-loans.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_general-information.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_repayment-financial-aid-due-withdrawal.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_reviewing-financial-aid-status.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_reviewing-financial-aid-status_accepting-awards-online.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_sap-policy-financial-aid.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_scholarship-information.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_student-employment.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_students-rights-responsibilities.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_summer-financial-aid.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_terms-conditions-financial-aid.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_types-aid.md
-catalog.tamusa.edu_undergraduate_student-financial-aid-programs_work-study.md
-catalog.tamusa.edu_undergraduate_student-resources-services.md
-catalog.tamusa.edu_undergraduate_student-resources-services_academic-resources.md
-catalog.tamusa.edu_undergraduate_student-resources-services_military-affairs.md
-catalog.tamusa.edu_undergraduate_student-resources-services_other-services.md
-catalog.tamusa.edu_undergraduate_student-resources-services_student-life.md
-catalog.tamusa.edu_undergraduate_student-resources-services_student-services.md
-catalog.tamusa.edu_undergraduate_student-resources-services_title-ix.md
-catalog.tamusa.edu_undergraduate_using-catalog.html.md
+---
+
+## Record Structure
+
+Each record in `catalog.jsonl` represents one page from the TAMUSA academic catalog and contains:
+
+| Field | Description |
+|---|---|
+| `url` | Canonical URL for the catalog page |
+| `title` | Page title |
+| `full_body` | Full text content of the page |
+
+---
+
+## Coverage by Category
+
+| Category | Description | Approx. Records |
+|---|---|---|
+| Undergraduate Programs | Degree plans, concentrations, minors, certificates (BS, BA, BBA, BAAS, BGS) | ~600 |
+| Graduate Programs | Master's and certificate programs (MS, MA, MBA, MPA, MEd) | ~250 |
+| Course Listings (UG) | Undergraduate course descriptions by department prefix (A–Z) | ~550 |
+| Course Listings (Grad) | Graduate course descriptions by department prefix | ~200 |
+| Academic Policies | Registration, grades, probation, graduation, degree requirements, attendance | ~120 |
+| Admissions | Domestic, international, transfer admissions, TSI, Academic Fresh Start | ~60 |
+| Financial Aid | FAFSA, loans, scholarships, disbursement, SAP policy | ~120 |
+| Student Services | Academic resources, military affairs, Title IX, student life | ~50 |
+| Administrative | Board of Regents, university administration, faculty roster | ~78 |
+
+---
+
+## MVP Scope
+
+All 2,028 records are indexed in the ChromaDB vector store under `src/storage/`. The retrieval pipeline retrieves the 20 most semantically similar chunks per query and passes the top 7 through the cross-encoder reranker before LLM generation.
+
+---
+
+## Explicitly Out of Scope
+
+The following are **not** present in `catalog.tamusa.edu` and are therefore out of JagUnify's scope. Queries on these topics trigger a clean refusal.
+
+- Dining and meal plans
+- Athletics and sports
+- Campus parking operations and maps
+- Library hours and services
+- Weather and campus events
+- Admission requirements for other universities

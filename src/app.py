@@ -49,11 +49,9 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# Allow requests from the configured frontend origin
-_ALLOWED_ORIGIN = os.getenv("CORS_ORIGIN", "http://localhost:5173")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[_ALLOWED_ORIGIN],
+    allow_origins=["*"],
     allow_methods=["POST"],
     allow_headers=["*"],
 )
@@ -63,7 +61,7 @@ engine = None
 
 MAX_QUESTION_LEN = 500   # characters
 MAX_HISTORY_TURNS = 10   # prior turns kept
-MAX_TURN_TEXT_LEN = 1000 # characters per turn
+MAX_TURN_TEXT_LEN = 4000 # characters per turn
 
 
 class HistoryTurn(BaseModel):
