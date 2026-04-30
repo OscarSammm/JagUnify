@@ -3,51 +3,49 @@
 JagUnify is an AI-powered academic advisor chatbot for Texas A&M University–San Antonio students. It answers questions about degree requirements, admissions, financial aid, academic policies, and registration using official catalog sources — with verifiable citations.
 
 ## MVP Scope
-* **User Question Input:** A text-based interface where students can submit inquiries.
-* **Document Retrieval:** A retrieval engine that pulls relevant context from indexed TAMUSA documents.
-* **Answer Generation:** The LLM will respond to the query with an answer grounded in evidence pulled from the data sources, or will refuse to provide an answer if evidence is not available
-* **Providing Citations:** The response from the LLM will have both in-line citations to denote information pulled from a source, as well as a list of clickable links that take the user to the cited page.
 
-## Scope Statement
-
-**In Scope Domains**
-- TAMUSA undergraduate and graduate **catalog content** (`catalog.tamusa.edu`)
-- Degree requirements (e.g., majors, credit hours, graduation criteria)
-- Academic policies (GPA requirements, probation, appeals, registration rules)
+**In Scope**
+- TAMUSA undergraduate and graduate catalog content (`catalog.tamusa.edu`)
+- Degree requirements (majors, credit hours, graduation criteria)
+- Academic policies (GPA requirements, probation, appeals, registration)
 - Admissions requirements (first-year and transfer)
-- Financial aid information (FAFSA process, eligibility, deadlines)
-- Course and curriculum information explicitly defined in the catalog
+- Financial aid (FAFSA process, eligibility, deadlines)
+- Course and curriculum information from the catalog
 
-**Out of Scope Domains**
-- Campus services not included in the catalog (library hours, dining, housing, parking locations)
+**Out of Scope**
+- Campus services not in the catalog (library hours, dining, housing, parking)
 - Athletics, student life, and extracurricular activities
-- Real-time or operational information (event schedules, office hours, deadlines outside catalog)
-- External outcomes data (job placement rates, salaries, alumni info)
+- Real-time or operational information (event schedules, office hours)
+- External outcomes data (job placement, salaries, alumni info)
 - Any non-TAMUSA or non-catalog sources
 
-**System Refusal Behavior**
-- The system will **refuse to answer** if:
-  - No relevant catalog source is retrieved
-  - The question falls outside the catalog domain
-  - The answer cannot be supported with at least one verifiable citation
-- Refusals follow a consistent format:
-  > "I cannot find supporting information in the indexed TAMUSA documents."
-- The system will **not guess, infer, or use external knowledge** beyond retrieved catalog content
+**Refusal Behavior**
+
+The system refuses if no relevant catalog source is retrieved, the question falls outside the catalog domain, or the answer cannot be supported with at least one citation:
+
+> "I cannot find supporting information in the indexed TAMUSA documents."
 
 ## Features
 
-- Grounded answers with inline citations linking to official catalog pages
-- Multi-turn conversation memory — follow-up questions retain prior context
-- Refusal when a question falls outside the indexed catalog
-- Re-ranker pipeline for high-quality source retrieval
+- Grounded answers with inline citations linking to official `catalog.tamusa.edu` pages
+- Multi-turn conversation — follow-up questions retain prior context
+- Clean refusal when a question falls outside the indexed catalog
+- Two-stage retrieval: vector similarity (top 20) → cross-encoder reranker (top 7)
 - React chat interface with campus background
 
 ## Tech Stack
 
-- **Frontend:** React + Vite + Tailwind CSS
-- **Backend:** FastAPI (Python)
-- **RAG Pipeline:** LlamaIndex + ChromaDB + OpenAI
-- **Re-ranker:** cross-encoder/ms-marco-MiniLM-L-12-v2
+| Layer | Technology |
+|---|---|
+| Frontend | React + Vite + Tailwind CSS |
+| Backend | FastAPI (Python) |
+| RAG Pipeline | LlamaIndex + ChromaDB |
+| LLM | OpenAI `gpt-4o-mini` |
+| Re-ranker | `cross-encoder/ms-marco-MiniLM-L-12-v2` |
+
+## Data
+
+The catalog index is built from `data/techdep_data/catalog.jsonl` — 2,028 structured records scraped from `catalog.tamusa.edu` by the TAMUSA technology department. Each record contains a `url`, `title`, and `full_body` field. The index is persisted to `src/storage/` (ChromaDB).
 
 ## Setup
 
@@ -55,61 +53,71 @@ JagUnify is an AI-powered academic advisor chatbot for Texas A&M University–Sa
 
 - Python 3.10+
 - Node.js 18+
-- An OpenAI API key
+- OpenAI API key with access to `gpt-4o-mini`
 
 ### Backend
 
-1. Clone the repo
-2. Create a `.env` file in the root folder (see `.env.example`):
+1. Clone the repo and create a `.env` file in the project root (see `.env.example`):
    ```
-   OPENAI_API_KEY=your_api_key
+   OPENAI_API_KEY=your_api_key_here
    ```
-3. Install dependencies:
+
+2. Install Python dependencies:
    ```
    pip install -r requirements.txt
    ```
-4. Build the vector index (first time only):
+
+3. Build the vector index (first time only — reads from `data/techdep_data/catalog.jsonl`):
    ```
    cd src
    python retrieval.py
    ```
-5. Start the API server:
+   Expect ~2 minutes. If `src/storage/` already exists and is current, skip this step.
+
+4. Start the backend:
    ```
    cd src
    python -m uvicorn app:app --reload
    ```
+   Backend runs on `http://127.0.0.1:8000`. Startup confirms: `JagUnify advisor ready.`
 
 ### Frontend
 
-1. Navigate to the frontend directory:
+1. Install dependencies:
    ```
-   cd "frontend"
-   ```
-2. Create a `.env` file (see `.env.example`):
-   ```
-   VITE_API_URL=http://localhost:8000
-   ```
-3. Install dependencies:
-   ```
+   cd frontend
    npm install
    ```
-4. Start the dev server:
+
+2. Start the dev server:
    ```
    npm run dev
    ```
-5. Open `http://localhost:5173`
+   Open the URL Vite prints (default `http://localhost:5173`).
 
-## Grounded Example
+## Example Interactions
 
-The user asks the tool, "What is the required GPA to avoid academic probation?" The LLM will respond by stating that the GPA for avoiding academic probation is 2.0, as well as providing more specific information for other specific rpograms. It will include in-line citations that back up its answer, as well as  
+**Grounded answer:** "What is the required GPA to avoid academic probation?"
+> A minimum 2.0 cumulative institutional GPA is required to avoid academic probation. Students in the Teacher Preparation Program must maintain a 2.75. [1]
 
-## Refusal Example
+**Refusal:** "What are the dining options on campus?"
+> I cannot find supporting information in the indexed TAMUSA documents.
 
-The user will ask the tool what the operating hours for the university's library are. This information isn't actually available within any of the documents the system is able to pull from, so it responds by saying "I cannot find supporting information in the included TAMUSA documents."
+## Evaluation
+
+Tested against a 20-case suite (14 grounded + 6 refusal):
+
+| Metric | Result |
+|---|---|
+| Retrieval Accuracy | 14/14 (100%) |
+| Grounding Accuracy | 14/14 (100%) |
+| Refusal Accuracy | 5/5 (100%) |
+
+See `docs/evaluation_test_cases.md` for full case details.
 
 ## Project Status
 
-Currently in active development for an academic course (Milestone 2 complete).
+Sprint 3 complete. Final demo delivered April 29, 2026. See `docs/Final_Demo/` for the runbook, slides, and demo video.
 
 ## Team
 
